@@ -65,7 +65,7 @@ class EventsController < ApplicationController
   private
     def prepare_all_events
       events = []
-      url = "https://graph.facebook.com/v2.8/#{params[:page]}/events?access_token=EAACEdEose0cBADKcRU6IGSldoFXa7PDsO34BArzuZAedWElWEN061eqKeZCSpVB1KLUBZBnv9Qk5wS02OpvWczRLp3wXwbuslCoGd4ZBDaaoRnFfY0YW27UEoPrAVXrn5DGiPqkLHioISaiX2uBlOpzwmHY9J0cuAQZBjPBnecgZDZD&debug=all&format=json&method=get&pretty=0&suppress_http_code=1"
+      url = "https://graph.facebook.com/v2.8/#{params[:page]}/events?access_token=EAAIWjc9VGwgBAB69FZCAi8JQSZAcAUtjgWtoWf6bw3oJ5fPpQgZA4lwQupaHpQo4qXzoMheDZA1QiQySDS6EJah33M5kISxfbPZCgKaWl9sR6pdav9ys9QZAUi95CNRYx0AgLZCwq9GXyueTuZCpXc8oZCYqEHDFLxU0ZD&debug=all&format=json&method=get&pretty=0&suppress_http_code=1"
       while true && url != nil
         response = HTTParty.send(:get, url, {})
         response = HashWithIndifferentAccess.new(response)

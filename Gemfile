@@ -17,6 +17,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'httparty'
 gem 'httmultiparty'
 gem 'pry-rails'
+gem 'omniauth-facebook'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
