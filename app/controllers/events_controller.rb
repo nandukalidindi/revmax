@@ -4,8 +4,9 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    persist_events
-    @events = Event.all
+    @events = Event.where(handle: params[:page])
+    persist_events if @events.count == 0
+    @events
   end
 
   # GET /events/1
@@ -81,7 +82,11 @@ class EventsController < ApplicationController
 
     def persist_events
       prepare_all_events.each do |x|
-        Event.find_or_create_by(description: x.try(:[], :name), page: x.try(:[], :place).try(:[], :name))
+        event = Event.find_or_create_by(description: x[:description],
+                                        name: x[:name],
+                                        start_time: x[:start_time],
+                                        handle: params[:page])
+        event.update_column(:place, x[:place])
       end
     end
 
@@ -92,7 +97,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      # params.require(:event).permit(:description, :page)
-      {}
+      params.require(:event).permit(:description, :page)
     end
 end

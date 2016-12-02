@@ -1,11 +1,20 @@
 <p id="notice"><%= notice %></p>
 
+<html>
+<head>
+  <%= favicon_link_tag %>
+  <title>Revmax</title>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
 <h1>Events Preview</h1>
 <table>
   <thead>
     <tr>
+      <th>Name</th>
       <th>Description</th>
-      <th>Page</th>
+      <th>Start Time</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,8 +22,9 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
+        <td><%= event.name %></td>
         <td><%= event.description %></td>
-        <td><%= event.page %></td>
+        <td><%= event.start_time %></td>
         <td><%= link_to 'Show', event %></td>
       </tr>
     <% end %>
