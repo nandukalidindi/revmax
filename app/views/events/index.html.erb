@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Events Preview</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Page</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @events.each do |event| %>
+      <tr>
+        <td><%= event.description %></td>
+        <td><%= event.page %></td>
+        <td><%= link_to 'Show', event %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
