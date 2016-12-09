@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202083439) do
+ActiveRecord::Schema.define(version: 20161209214417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,12 +25,32 @@ ActiveRecord::Schema.define(version: 20161202083439) do
 
   create_table "events", force: :cascade do |t|
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "name"
     t.jsonb    "place"
     t.datetime "start_time"
     t.string   "handle"
+    t.integer  "fid"
+    t.integer  "attending_count"
+    t.boolean  "can_guests_invite"
+    t.string   "category"
+    t.jsonb    "cover"
+    t.integer  "declined_count"
+    t.boolean  "guest_list_enabled"
+    t.integer  "interested_count"
+    t.boolean  "is_canceled"
+    t.boolean  "is_page_owned"
+    t.boolean  "is_viewer_admin"
+    t.integer  "maybe_count"
+    t.integer  "noreply_count"
+    t.string   "parent_group"
+    t.jsonb    "owner"
+    t.string   "ticket_uri"
+    t.string   "timezone"
+    t.datetime "end_time"
+    t.datetime "updated_time"
+    t.string   "type"
   end
 
 end
