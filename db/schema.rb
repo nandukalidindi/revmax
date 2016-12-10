@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161209214417) do
+ActiveRecord::Schema.define(version: 20161209233501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20161209214417) do
     t.jsonb    "place"
     t.datetime "start_time"
     t.string   "handle"
-    t.integer  "fid"
+    t.string   "fid"
     t.integer  "attending_count"
     t.boolean  "can_guests_invite"
     t.string   "category"

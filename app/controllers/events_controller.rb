@@ -5,7 +5,7 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = Event.where(handle: params[:page])
-    persist_events if @events.count == 0
+    persist_complete_event_set if @events.count == 0
     @events
   end
 
@@ -86,18 +86,22 @@ class EventsController < ApplicationController
 
     def prepare_complete_event_set
       full_response = []
-      ids = persist_events.map { |x| x[:id] }
+      ids = prepare_all_events.map { |x| x[:id] }
       access_token = ConnectedApp.where(name: 'facebook').first.try(:access_token)
-      ids.each do |x|
-        url = "https://graph.facebook.com/v2.8/#{id}?access_token=#{access_token}
-               &debug=all&fields=fields=id,attending_count,can_guests_invite,
-               category,cover,declined_count,description,end_time,
-               guest_list_enabled,interested_count,is_canceled,is_page_owned,
-               is_viewer_admin,maybe_count,name,noreply_count,owner,parent_group,
-               place,start_time,ticket_uri,timezone,type,updated_time&
-               format=json&method=get&pretty=0&suppress_http_code=1"
+      ids.each do |id|
+        url = "https://graph.facebook.com/v2.8/#{id}?access_token=#{access_token}" +
+               "&debug=all&fields=attending_count,can_guests_invite," +
+               "category,cover,declined_count,description,end_time," +
+               "guest_list_enabled,interested_count,is_canceled,is_page_owned," +
+               "is_viewer_admin,maybe_count,name,noreply_count,owner,parent_group," +
+               "place,start_time,ticket_uri,timezone,type,updated_time&" +
+               "format=json&method=get&pretty=0&suppress_http_code=1"
         response = HTTParty.send(:get, url, {})
         response = HashWithIndifferentAccess.new(response)
+        response[:fid] = response[:id]
+        response[:handle] = params[:page]
+        response.delete(:id)
+        response.delete(:__debug__)
         full_response << response
       end
       full_response
