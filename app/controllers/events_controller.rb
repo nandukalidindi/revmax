@@ -109,8 +109,10 @@ class EventsController < ApplicationController
 
     def persist_complete_event_set
       prepare_complete_event_set.each do |x|
-        event = Event.new(x)
-        event.save!
+        if Event.where(start_time: x[:start_time], end_time: x[:end_time]).count == 0
+          event = Event.new(x)
+          event.save!
+        end
       end
     end
 
