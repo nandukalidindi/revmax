@@ -100,16 +100,33 @@ class EventsController < ApplicationController
         response = HashWithIndifferentAccess.new(response)
         response[:fid] = response[:id]
         response[:handle] = params[:page]
+        response = enrich_place(response, response[:place] || {})
         response.delete(:id)
+        response.delete(:place)
         response.delete(:__debug__)
         full_response << response
       end
       full_response
     end
 
+    def enrich_place(response, place)
+      Rails.logger.info "PLACE IS #{place}"
+      # binding.pry
+      response[:venue_fid] = place.try(:[], "id")
+      response[:venue_name] = place.try(:[], "name")
+      response[:venue_city] = place.try(:[], "location").try(:[], 'city')
+      response[:venue_state] = place.try(:[], "location").try(:[], 'state')
+      response[:venue_country] = place.try(:[], "location").try(:[], 'country')
+      response[:venue_latitude] = place.try(:[], "location").try(:[], 'latitude')
+      response[:venue_longitude] = place.try(:[], "location").try(:[], 'longitude')
+      response
+    end
+
     def persist_complete_event_set
       prepare_complete_event_set.each do |x|
-        if Event.where(start_time: x[:start_time], end_time: x[:end_time]).count == 0
+        if Event.where(name: x[:name],
+                       venue_fid: x[:venue_fid],
+                       start_time: x[:start_time]).count == 0
           event = Event.new(x)
           event.save!
         end
@@ -118,11 +135,10 @@ class EventsController < ApplicationController
 
     def persist_events
       prepare_all_events.each do |x|
-        event = Event.find_or_create_by(description: x[:description],
-                                        name: x[:name],
+        event = Event.find_or_create_by(venue_name: x[:venue_name],
                                         start_time: x[:start_time],
-                                        handle: params[:page])
-        event.update_column(:place, x[:place])
+                                        venue_latitude: x[:venue_latitude],
+                                        venue_longitude: x[:venue_longitude])
       end
     end
 
