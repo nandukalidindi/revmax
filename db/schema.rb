@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161222001355) do
+ActiveRecord::Schema.define(version: 20161222200600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20161222001355) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "name"
-    t.datetime "start_time"
+    t.string   "start_time"
     t.string   "handle"
     t.string   "fid"
     t.integer  "attending_count"
@@ -47,7 +47,7 @@ ActiveRecord::Schema.define(version: 20161222001355) do
     t.jsonb    "owner"
     t.string   "ticket_uri"
     t.string   "timezone"
-    t.datetime "end_time"
+    t.string   "end_time"
     t.datetime "updated_time"
     t.string   "type"
     t.string   "venue_fid"
