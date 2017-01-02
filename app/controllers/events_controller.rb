@@ -100,9 +100,14 @@ class EventsController < ApplicationController
         response = HashWithIndifferentAccess.new(response)
         response[:fid] = response[:id]
         response[:handle] = params[:page]
+        response[:owner_name] = response.try(:[], 'owner').try(:[], 'name')
+        response[:cover_source] = response.try(:[], 'cover').try(:[], 'source')
         response = enrich_place(response, response[:place] || {})
+        response.delete(:owner)
+        response.delete(:cover)
         response.delete(:id)
         response.delete(:place)
+        response.delete(:description)
         response.delete(:__debug__)
         full_response << response
       end
