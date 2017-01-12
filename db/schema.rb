@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170102043653) do
+ActiveRecord::Schema.define(version: 20170112023836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,6 @@ ActiveRecord::Schema.define(version: 20170102043653) do
     t.boolean  "is_viewer_admin"
     t.integer  "maybe_count"
     t.integer  "noreply_count"
-    t.string   "parent_group"
-    t.string   "ticket_uri"
     t.string   "timezone"
     t.string   "end_time"
     t.datetime "updated_time"
@@ -54,8 +52,8 @@ ActiveRecord::Schema.define(version: 20170102043653) do
     t.string   "venue_country"
     t.string   "venue_latitude"
     t.string   "venue_longitude"
-    t.string   "owner_name"
-    t.string   "cover_source"
+    t.string   "geometry"
+    t.integer  "venue_capacity"
   end
 
 end
