@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170112023836) do
+ActiveRecord::Schema.define(version: 20170114181637) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,7 +27,6 @@ ActiveRecord::Schema.define(version: 20170112023836) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "name"
-    t.string   "start_time"
     t.string   "handle"
     t.string   "fid"
     t.integer  "attending_count"
@@ -42,7 +41,6 @@ ActiveRecord::Schema.define(version: 20170112023836) do
     t.integer  "maybe_count"
     t.integer  "noreply_count"
     t.string   "timezone"
-    t.string   "end_time"
     t.datetime "updated_time"
     t.string   "type"
     t.string   "venue_fid"
@@ -54,6 +52,8 @@ ActiveRecord::Schema.define(version: 20170112023836) do
     t.string   "venue_longitude"
     t.string   "geometry"
     t.integer  "venue_capacity"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
 end
