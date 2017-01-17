@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170115212649) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "events", force: :cascade do |t|
+  create_table "events", primary_key: "event_id", force: :cascade do |t|
     t.date     "created_at"
     t.date     "updated_at"
     t.string   "name"
