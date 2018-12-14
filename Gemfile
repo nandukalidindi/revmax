@@ -17,7 +17,10 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'httparty'
 gem 'httmultiparty'
 gem 'pry-rails'
+gem 'omniauth-oauth'
 gem 'omniauth-facebook'
+
+# gem 'omniauth-garmin', git: 'https://github.com/octanner/omniauth-garmin.git'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
